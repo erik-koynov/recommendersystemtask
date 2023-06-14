@@ -1,0 +1,5 @@
+JSON_FORMAT_FIELDS = ["job", "talent", "label"]
+SENIORITY_HIERARCHY_MAPPING = ["none", "junior", "midlevel", "senior"]
+DEGREE_HIERARCHY_MAPPING = ["none", "bachelor", "apprenticeship", "master", "doctorate"]
+LANGUAGE_RATING_HIERARCHY_MAPPING = ["A1","A2","B1","B2","C1","C2"]
+LANGUAGE_MUST_HAVE_HIERARCHY_MAPPING = ["False","True"]
