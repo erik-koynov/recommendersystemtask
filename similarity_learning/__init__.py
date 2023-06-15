@@ -1,3 +1,4 @@
+from .search import Search
 import logging
 logger = logging.getLogger('similarity_learning')
 logger.setLevel(logging.DEBUG)

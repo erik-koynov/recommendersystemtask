@@ -27,3 +27,7 @@ implements all abstractions. It is organized as follows:
 features e.g. between salary expectation and max proposed salary, or the
 difference between the seniority min/max required seniority and the job
 applicant's seniority.
+
+## Usage
+- install via pip install (-e) .
+- from similarity_learning import Search
