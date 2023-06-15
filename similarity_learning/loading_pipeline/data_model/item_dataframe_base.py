@@ -1,13 +1,13 @@
 import pandas as pd
-from ..utils.reformat_dict_fields import unpack_list_of_dicts_column
-from ..utils.elementwise_sorting import element_wise_sorting, ElementWiseSortingDType
-from ..utils.retrieve_class_properties import retrieve_class_properties
-from ..utils.exceptions import DataLoadingError
-from similarity_learning.preprocessing_tools.node_id_generation import generate_node_ids
-from typing import Union, List
+from ..preprocessing.reformat_dict_fields import unpack_list_of_dicts_column
+from ..preprocessing.elementwise_sorting import element_wise_sorting, ElementWiseSortingDType
+from ..preprocessing.retrieve_class_properties import retrieve_class_properties
+from similarity_learning.exceptions import DataLoadingError
+from ..preprocessing.node_id_generation import generate_node_ids
+from typing import Union, List, Dict, Any
 from abc import ABC, abstractmethod
-from ..utils.expand_raw_categorical_features import add_language_suffix
-from ..utils.exceptions import DoubleUsageError
+from ..preprocessing.expand_raw_categorical_features import add_language_suffix
+from similarity_learning.exceptions import DoubleUsageError
 
 class ItemDataFrameBase(ABC):
     def __init__(self, data: pd.DataFrame, add_language_suffix=False):
@@ -52,7 +52,9 @@ class ItemDataFrameBase(ABC):
         return list(self.title_languages.explode().unique())
 
     @classmethod
-    def from_full_json(cls, data: pd.Series, add_language_suffix=False)->"ItemDataFrameBase":
+    def from_full_json(cls,
+                       data: Union[pd.Series, Dict[str, Any], List[Dict[str, Any]]],
+                       add_language_suffix=False)->"ItemDataFrameBase":
         data: pd.DataFrame = pd.json_normalize(data)
         data.languages = element_wise_sorting(data.languages, ElementWiseSortingDType.DICT)
         data, unpacked_column_names = unpack_list_of_dicts_column(data, 'languages',
@@ -91,10 +93,10 @@ class Iloc:
     def __init__(self, data: ItemDataFrameBase):
         self.data = data
 
-    def __getitem__(self, item: Union[int, List[int]])->ItemDataFrameBase:
+    def __getitem__(self, item: Union[int, List[int], slice]) -> ItemDataFrameBase:
         if isinstance(item, int):
             new_data = pd.DataFrame(self.data.data.iloc[item]).T
-        elif isinstance(item, list):
+        elif isinstance(item, list) or isinstance(item, slice):
             new_data = self.data.data.iloc[item]
         else:
             raise ValueError("item must be of type int or a list of ints")

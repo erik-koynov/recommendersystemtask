@@ -2,7 +2,7 @@ import pandas as pd
 from pathlib import Path
 from typing import Union, List, Tuple
 from similarity_learning.globals import JSON_FORMAT_FIELDS
-from .exceptions import UnexpectedJsonFormatException
+from similarity_learning.exceptions import UnexpectedJsonFormatException
 
 
 

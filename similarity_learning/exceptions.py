@@ -6,3 +6,9 @@ class DataLoadingError(Exception):
 
 class DoubleUsageError(Exception):
     pass
+
+class NotSetAttributeError(Exception):
+    pass
+
+class NotFittedError(Exception):
+    pass

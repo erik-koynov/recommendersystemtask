@@ -1,6 +1,6 @@
 from typing import List
 import pandas as pd
-from similarity_learning.preprocessing_tools.utils import inplace_option
+from similarity_learning.loading_pipeline.preprocessing.utils import inplace_option
 
 def _add_language_suffix(titles_language: List[str], other_language_feature: List[str]):
     """
