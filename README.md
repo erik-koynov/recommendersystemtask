@@ -1,5 +1,5 @@
 # Intro
-This is a solution to task, which requires learning a similarity metric
+This is a solution to a task, which requires learning a similarity metric
 between items from two sets (jobs and job candidates). I implement two
 approaches - a baseline, feature-engineering based approach and a deep 
 learning based approach. 
